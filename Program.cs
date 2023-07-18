@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-bool test = false;
+int gold = 42;
+int enemyGold = 35;
 
 ApplicationConfiguration.Initialize();
 Application.EnableVisualStyles();
@@ -21,6 +22,7 @@ bool isDown = false;
 
 PictureBox pb = new PictureBox();
 pb.Dock = DockStyle.Fill;
+
 System.Windows.Forms.Timer tm = new System.Windows.Forms.Timer();
 
 form.Controls.Add(pb);
@@ -46,7 +48,7 @@ Point ajdCenter = Point.Empty;
 
 tm.Tick += (o, e) =>
 {
-    Front.Desenhar(bmp, g, Cursor.Position, test);
+    Front.Desenhar(bmp, g, Cursor.Position, isDown, gold, enemyGold);
     pb.Refresh();
 };
 
