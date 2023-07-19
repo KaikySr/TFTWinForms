@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-int gold = 42;
-int enemyGold = 35;
+int gold = 43;
+int enemyGold = 22;
 
 ApplicationConfiguration.Initialize();
 Application.EnableVisualStyles();

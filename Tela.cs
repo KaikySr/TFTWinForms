@@ -26,23 +26,33 @@ public static class Front
         //Variaveis para tamanhos e posicionamentos
         int linha = 10;
 
-        int larguraArena = (int)(0.700f * bmp.Width);
+        int larguraArena = (int)(0.700f * bmp.Width) - 3;
         int alturaArena = (int)(0.795f * bmp. Height);
 
         int larguraMyGold = (int)(0.030 * bmp. Width);
         int alturaMyGold = alturaArena / 2;
 
+        int larguraMyChamps = larguraArena;
+        int alturaMyChamps = (int)(0.100 * bmp. Height);
+
+        int larguraMyChampsSlot = (larguraMyChamps/9);
+
         int point0LargArena = (bmp.Width - larguraArena) / 2;
         int point0AltArena = (int)(0.010 * bmp.Height);
+
 
         int point0LargMyGold = point0LargArena - larguraMyGold;
         int point0AltMyGold = (alturaArena - alturaMyGold) / 2;
         
+
         int larguraShop = larguraArena;
         int alturaShop = (int)(0.180f * bmp.Height);
 
         int point0LargShop = (bmp.Width - larguraShop) / 2;
         int point0AltShop =  bmp.Height - alturaShop - 3;
+
+        int point0LargMyChamps = point0LargShop;
+        int point0AltMyChamps = point0AltArena + alturaArena - alturaMyChamps;
 
         int larguraSlot = (larguraShop - 4 - linha) / 6;
         int alturaSlot = alturaShop - linha;
@@ -60,14 +70,39 @@ public static class Front
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Rectangle arena = new Rectangle(point0LargArena, point0AltArena, larguraArena, alturaArena);
 
+        Rectangle myChamps = new Rectangle(point0LargMyChamps, point0AltMyChamps, larguraMyChamps, alturaMyChamps);
+        Rectangle enemyChamps = new Rectangle(point0LargMyChamps, point0AltArena, larguraMyChamps, alturaMyChamps);
+
+        Rectangle myChamp1 = new Rectangle(point0LargMyChamps, point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp2 = new Rectangle(point0LargMyChamps + larguraMyChampsSlot, point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp3 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 2), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp4 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 3), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp5 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 4), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp6 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 5), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp7 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 6), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp8 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 7), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle myChamp9 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 8), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+
+        Rectangle enemyChamp1 = new Rectangle(point0LargMyChamps, point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp2 = new Rectangle(point0LargMyChamps + larguraMyChampsSlot, point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp3 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 2), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp4 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 3), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp5 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 4), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp6 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 5), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp7 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 6), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp8 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 7), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+        Rectangle enemyChamp9 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 8), point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
+
+
         Rectangle myGold = new Rectangle(point0LargMyGold, point0AltMyGold, larguraMyGold, alturaMyGold - 4);
+        Rectangle enemyGold = new Rectangle(point0LargArena + larguraArena, (alturaArena - alturaMyGold) / 2, larguraMyGold, alturaMyGold - 4);
+
         Rectangle myGold1 = new Rectangle(point0LargMyGold, point0AltMyGold , larguraMyGold, (alturaMyGold / 5));
         Rectangle myGold2 = new Rectangle(point0LargMyGold, point0AltMyGold + (alturaMyGold / 5), larguraMyGold, (alturaMyGold / 5));
         Rectangle myGold3 = new Rectangle(point0LargMyGold, point0AltMyGold + (alturaMyGold / 5) * 2, larguraMyGold, (alturaMyGold / 5));
         Rectangle myGold4 = new Rectangle(point0LargMyGold, point0AltMyGold + (alturaMyGold / 5) * 3, larguraMyGold, (alturaMyGold / 5));
         Rectangle myGold5 = new Rectangle(point0LargMyGold, point0AltMyGold + (alturaMyGold / 5) * 4, larguraMyGold, (alturaMyGold / 5));
 
-        Rectangle enemyGold = new Rectangle(point0LargArena + larguraArena, (alturaArena - alturaMyGold) / 2, larguraMyGold, alturaMyGold - 4);
         Rectangle enemyGold1 = new Rectangle(point0LargArena + larguraArena, point0AltMyGold , larguraMyGold, (alturaMyGold / 5));
         Rectangle enemyGold2 = new Rectangle(point0LargArena + larguraArena, point0AltMyGold + (alturaMyGold / 5), larguraMyGold, (alturaMyGold / 5));
         Rectangle enemyGold3 = new Rectangle(point0LargArena + larguraArena, point0AltMyGold + (alturaMyGold / 5) * 2, larguraMyGold, (alturaMyGold / 5));
@@ -88,6 +123,7 @@ public static class Front
         Rectangle slot3 = new Rectangle(point0LargShop + (larguraSlot * 3) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
         Rectangle slot4 = new Rectangle(point0LargShop + (larguraSlot * 4) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
         Rectangle slot5 = new Rectangle(point0LargShop + (larguraSlot * 5) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
+
 
         Rectangle statsArea = new Rectangle(point0LargShop - larguraStats, point0AltShop, larguraStats, alturaStats);
         Rectangle stats = new Rectangle(point0LargShop - larguraStats + 5, point0AltShop + 5, larguraStats - linha, alturaStats - linha);
@@ -127,6 +163,29 @@ public static class Front
         //Layout//
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         g.DrawRectangle(canetaPreta, arena);
+
+        g.DrawRectangle(canetaPreta, myChamps);
+        g.DrawRectangle(canetaPreta, enemyChamps);
+
+        g.DrawRectangle(canetaPreta, myChamp1);
+        g.DrawRectangle(canetaPreta, myChamp2);
+        g.DrawRectangle(canetaPreta, myChamp3);
+        g.DrawRectangle(canetaPreta, myChamp4);
+        g.DrawRectangle(canetaPreta, myChamp5);
+        g.DrawRectangle(canetaPreta, myChamp6);
+        g.DrawRectangle(canetaPreta, myChamp7);
+        g.DrawRectangle(canetaPreta, myChamp8);
+        g.DrawRectangle(canetaPreta, myChamp9);
+
+        g.DrawRectangle(canetaPreta, enemyChamp1);
+        g.DrawRectangle(canetaPreta, enemyChamp2);
+        g.DrawRectangle(canetaPreta, enemyChamp3);
+        g.DrawRectangle(canetaPreta, enemyChamp4);
+        g.DrawRectangle(canetaPreta, enemyChamp5);
+        g.DrawRectangle(canetaPreta, enemyChamp6);
+        g.DrawRectangle(canetaPreta, enemyChamp7);
+        g.DrawRectangle(canetaPreta, enemyChamp8);
+        g.DrawRectangle(canetaPreta, enemyChamp9);
 
         g.DrawRectangle(canetaPreta, myGold);
         g.DrawRectangle(canetaPreta, myGold1);
