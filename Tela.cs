@@ -13,7 +13,7 @@ public static class Front
 
         //Pinceis
         SolidBrush fundoShop = new SolidBrush(Color.FromArgb(41, 41, 41));
-        Brush expBrush = Brushes.DarkBlue;
+        Brush fundoAzul = Brushes.DarkBlue;
         Brush rollBrush = Brushes.DarkGoldenrod;
         Brush noGold = Brushes.Gray;
         
@@ -29,6 +29,9 @@ public static class Front
         int larguraArena = (int)(0.700f * bmp.Width) - 3;
         int alturaArena = (int)(0.795f * bmp. Height);
 
+        int larguraRound = ((bmp.Width - larguraArena) / 2) - 25;
+        int alturaRound = (int)(0.150 * bmp. Height);
+
         int larguraMyGold = (int)(0.030 * bmp. Width);
         int alturaMyGold = alturaArena / 2;
 
@@ -37,22 +40,8 @@ public static class Front
 
         int larguraMyChampsSlot = (larguraMyChamps/9);
 
-        int point0LargArena = (bmp.Width - larguraArena) / 2;
-        int point0AltArena = (int)(0.010 * bmp.Height);
-
-
-        int point0LargMyGold = point0LargArena - larguraMyGold;
-        int point0AltMyGold = (alturaArena - alturaMyGold) / 2;
-        
-
         int larguraShop = larguraArena;
         int alturaShop = (int)(0.180f * bmp.Height);
-
-        int point0LargShop = (bmp.Width - larguraShop) / 2;
-        int point0AltShop =  bmp.Height - alturaShop - 3;
-
-        int point0LargMyChamps = point0LargShop;
-        int point0AltMyChamps = point0AltArena + alturaArena - alturaMyChamps;
 
         int larguraSlot = (larguraShop - 4 - linha) / 6;
         int alturaSlot = alturaShop - linha;
@@ -66,9 +55,34 @@ public static class Front
         int larguraLockShop = larguraStats / 3;
         int alturaLockShop = alturaStats / 3;
 
+        int larguraTimer = larguraRound;
+        int alturaTimer = (int)(0.015 * bmp. Height);
+
+
+        int point0LargArena = (bmp.Width - larguraArena) / 2;
+        int point0AltArena = (int)(0.010 * bmp.Height);
+
+        int point0LargMyGold = point0LargArena - larguraMyGold;
+        int point0AltMyGold = (alturaArena - alturaMyGold) / 2;
+        
+        int point0LargShop = (bmp.Width - larguraShop) / 2;
+        int point0AltShop =  bmp.Height - alturaShop - 3;
+
+        int point0LargMyChamps = point0LargShop;
+        int point0AltMyChamps = point0AltArena + alturaArena - alturaMyChamps;
+
+        int point0LargRound = point0LargArena + larguraArena + 15;
+        int point0AltRound = point0AltArena;
+
+        
+
+
         //Molduras 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Rectangle arena = new Rectangle(point0LargArena, point0AltArena, larguraArena, alturaArena);
+
+        Rectangle round = new Rectangle(point0LargRound, point0AltRound, larguraRound, alturaRound);
+        Rectangle timer = new Rectangle(point0LargRound, point0AltRound + alturaRound + 10, larguraTimer, alturaTimer);
 
         Rectangle myChamps = new Rectangle(point0LargMyChamps, point0AltMyChamps, larguraMyChamps, alturaMyChamps);
         Rectangle enemyChamps = new Rectangle(point0LargMyChamps, point0AltArena, larguraMyChamps, alturaMyChamps);
@@ -133,7 +147,6 @@ public static class Front
 
         //Preencher
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        Rectangle ShopPreencher = new Rectangle(point0LargShop , point0AltShop, larguraShop - 2, alturaShop);
         Rectangle expPreencher = new Rectangle(point0LargShop + linha + 3, point0AltShop + linha + 3,  larguraExpAndRoll - 5, alturaExpAndRoll - 5);
         Rectangle rollPreencher = new Rectangle(point0LargShop + linha + 3, point0AltShop + alturaExpAndRoll + 23, larguraExpAndRoll - 5, alturaExpAndRoll - 5);
         
@@ -163,6 +176,11 @@ public static class Front
         //Layout//
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         g.DrawRectangle(canetaPreta, arena);
+
+        g.DrawRectangle(canetaPreta, round);
+
+        g.FillRectangle(fundoAzul, timer);
+        g.DrawRectangle(canetaPreta, timer);
 
         g.DrawRectangle(canetaPreta, myChamps);
         g.DrawRectangle(canetaPreta, enemyChamps);
@@ -259,7 +277,7 @@ public static class Front
             g.DrawRectangle(canetaDourada, enemyGold5Preencher);
         }
 
-        g.FillRectangle(fundoShop, ShopPreencher);
+        g.FillRectangle(fundoShop, shop);
 
         g.DrawRectangle(canetaPreta, levelAndRollEdge);
 
@@ -269,21 +287,25 @@ public static class Front
         g.DrawRectangle(canetaPreta, slot4);
         g.DrawRectangle(canetaPreta, slot5);
 
+
+
+        if (gold >= 4)
+            g.FillRectangle(fundoAzul, buyExp);
+        else 
+            g.FillRectangle(noGold, buyExp);
+        
+        if (gold >= 2)
+            g.FillRectangle(rollBrush, roll);
+        else
+            g.FillRectangle(noGold, roll);
+
         g.DrawRectangle(canetaBranca, buyExp);
         g.DrawRectangle(canetaBranca, roll);
 
-        if (gold >= 4)
-            g.FillRectangle(expBrush, expPreencher);
-        else 
-            g.FillRectangle(noGold, expPreencher);
-        
-        if (gold >= 2)
-            g.FillRectangle(rollBrush, rollPreencher);
-        else
-            g.FillRectangle(noGold, rollPreencher);
-
         g.DrawString(expText, fontExpAndRoll, letraBranca, expPreencher, format);
         g.DrawString(rollText, fontExpAndRoll, letraBranca, rollPreencher, format);
+
+
 
         g.DrawRectangle(canetaDourada, statsArea);
         g.DrawRectangle(canetaPreta, stats);
