@@ -13,3 +13,18 @@ C:\Users\disrct\Desktop\Kaiky\TFT WinForms\TFTvscode\obj\Debug\net7.0-windows\re
 C:\Users\disrct\Desktop\Kaiky\TFT WinForms\TFTvscode\obj\Debug\net7.0-windows\TFTvscode.pdb
 C:\Users\disrct\Desktop\Kaiky\TFT WinForms\TFTvscode\obj\Debug\net7.0-windows\TFTvscode.genruntimeconfig.cache
 C:\Users\disrct\Desktop\Kaiky\TFT WinForms\TFTvscode\obj\Debug\net7.0-windows\ref\TFTvscode.dll
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\bin\Debug\net7.0-windows\TFTvscode.exe
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\bin\Debug\net7.0-windows\TFTvscode.deps.json
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\bin\Debug\net7.0-windows\TFTvscode.runtimeconfig.json
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\bin\Debug\net7.0-windows\TFTvscode.dll
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\bin\Debug\net7.0-windows\TFTvscode.pdb
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.csproj.AssemblyReference.cache
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.AssemblyInfoInputs.cache
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.AssemblyInfo.cs
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.csproj.CoreCompileInputs.cache
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.dll
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\refint\TFTvscode.dll
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.pdb
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\TFTvscode.genruntimeconfig.cache
+C:\Users\disrct\Desktop\kaiky\TFTWinForms\obj\Debug\net7.0-windows\ref\TFTvscode.dll

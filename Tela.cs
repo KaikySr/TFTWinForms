@@ -58,6 +58,9 @@ public static class Front
         int larguraTimer = larguraRound;
         int alturaTimer = (int)(0.015 * bmp. Height);
 
+        int larguraComps = (bmp.Width - larguraArena - (larguraMyGold * 3)) / 2;
+        int alturaComps = alturaMyGold - ((alturaMyGold/5) * 2);
+
 
         int point0LargArena = (bmp.Width - larguraArena) / 2;
         int point0AltArena = (int)(0.010 * bmp.Height);
@@ -74,12 +77,30 @@ public static class Front
         int point0LargRound = point0LargArena + larguraArena + 15;
         int point0AltRound = point0AltArena;
 
-        
-
+        int point0LargComps = 5;
+        int point0AltComps = point0AltMyGold + (alturaMyGold/5) + 5;
 
         //Molduras 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         Rectangle arena = new Rectangle(point0LargArena, point0AltArena, larguraArena, alturaArena);
+
+        Rectangle comps = new Rectangle(point0LargComps, point0AltComps, larguraComps, alturaComps);
+
+        Rectangle devs = new Rectangle(point0LargComps, point0AltComps, larguraComps, (alturaComps/3) - 15);
+        Rectangle devsQnt = new Rectangle(point0LargComps, point0AltComps, larguraComps/3,(alturaComps/3) - 15);
+        Rectangle devsNome = new Rectangle((point0LargComps + larguraComps/3), point0AltComps, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        Rectangle devsBuffs = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+
+        Rectangle instrutores = new Rectangle(point0LargComps, point0AltComps + alturaComps/3, larguraComps, (alturaComps/3) - 15);
+        Rectangle instrutoresQnt = new Rectangle(point0LargComps, point0AltComps + alturaComps/3, larguraComps/3,(alturaComps/3) - 15);
+        Rectangle instrutoresNome = new Rectangle((point0LargComps + larguraComps/3), point0AltComps + alturaComps/3 , (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        Rectangle instrutoresBuffs = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + alturaComps/3 + ((alturaComps/3) - 15) / 2) + 1, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+
+        Rectangle mecanicos = new Rectangle(point0LargComps, point0AltComps + ((alturaComps/3) * 2), larguraComps, (alturaComps/3) - 15);
+        Rectangle mecanicosQnt = new Rectangle(point0LargComps, point0AltComps + ((alturaComps/3) * 2), larguraComps/3,(alturaComps/3) - 15);
+        Rectangle mecanicosNome = new Rectangle((point0LargComps + larguraComps/3), point0AltComps + ((alturaComps/3) * 2), (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        Rectangle mecanicosBuffs = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        
 
         Rectangle round = new Rectangle(point0LargRound, point0AltRound, larguraRound, alturaRound);
         Rectangle timer = new Rectangle(point0LargRound, point0AltRound + alturaRound + 10, larguraTimer, alturaTimer);
@@ -165,17 +186,59 @@ public static class Front
         //Escritas//
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         SolidBrush letraBranca = new SolidBrush(Color.White);
-        StringFormat format = new StringFormat();
-        format.Alignment = StringAlignment.Center;
-        format.LineAlignment = StringAlignment.Center;
+
+        StringFormat formatCenter = new StringFormat();
+        formatCenter.Alignment = StringAlignment.Center;
+        formatCenter.LineAlignment = StringAlignment.Center;
+
+        StringFormat formatLeftDown = new StringFormat();
+        formatLeftDown.Alignment = StringAlignment.Near;
+        formatLeftDown.LineAlignment = StringAlignment.Far;
+
+        StringFormat formatLeftUp = new StringFormat();
+        formatLeftUp.Alignment = StringAlignment.Near;
+        formatLeftUp.LineAlignment = StringAlignment.Near;
 
         String expText = "Comprar EXP 4";
         String rollText = "Atualizar 2";
         Font fontExpAndRoll = new Font("Arial", (int)(0.250 * alturaExpAndRoll));
 
+        String devsQntTxt = "2";
+        String devsNomeTxt = "Desenvolvedores";
+        String devsBuffsTxt = "2 - 4 - 5";
+
+        String instrutoresQntTxt = "3";
+        String instrutoresNomeTxt = "Instrutores";
+        String instrutoresBuffsTxt = "3 - 5";
+
+        String mecanicosQntTxt = "1";
+        String mecanicosNomeTxt = "Mecanicos";
+        String mecanicosBuffsTxt = "1 - 2 - 3";
+
+        Font fontQnt = new Font("Arial", (int)(0.300 * ((alturaComps/3) - 15)));
+        Font fontNomeAndBuffs = new Font("Arial", ((int)(0.350 * ((alturaComps/3) - 15)) / 2));
+
         //Layout//
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         g.DrawRectangle(canetaPreta, arena);
+
+        g.FillRectangle(fundoShop, devs);
+        g.DrawRectangle(canetaPreta, devs);
+        g.DrawString(devsQntTxt, fontQnt, letraBranca, devsQnt, formatCenter);
+        g.DrawString(devsNomeTxt, fontNomeAndBuffs, letraBranca, devsNome, formatLeftDown);
+        g.DrawString(devsBuffsTxt, fontNomeAndBuffs, letraBranca, devsBuffs, formatLeftUp);
+
+        g.FillRectangle(fundoShop, instrutores);
+        g.DrawRectangle(canetaPreta, instrutores);
+        g.DrawString(instrutoresQntTxt, fontQnt, letraBranca, instrutoresQnt, formatCenter);
+        g.DrawString(instrutoresNomeTxt, fontNomeAndBuffs, letraBranca, instrutoresNome, formatLeftDown);
+        g.DrawString(instrutoresBuffsTxt, fontNomeAndBuffs, letraBranca, instrutoresBuffs, formatLeftUp);
+
+        g.FillRectangle(fundoShop, mecanicos);
+        g.DrawRectangle(canetaPreta, mecanicos);
+        g.DrawString(mecanicosQntTxt, fontQnt, letraBranca, mecanicosQnt, formatCenter);
+        g.DrawString(mecanicosNomeTxt, fontNomeAndBuffs, letraBranca, mecanicosNome, formatLeftDown);
+        g.DrawString(mecanicosBuffsTxt, fontNomeAndBuffs, letraBranca, mecanicosBuffs, formatLeftUp);
 
         g.DrawRectangle(canetaPreta, round);
 
@@ -302,8 +365,8 @@ public static class Front
         g.DrawRectangle(canetaBranca, buyExp);
         g.DrawRectangle(canetaBranca, roll);
 
-        g.DrawString(expText, fontExpAndRoll, letraBranca, expPreencher, format);
-        g.DrawString(rollText, fontExpAndRoll, letraBranca, rollPreencher, format);
+        g.DrawString(expText, fontExpAndRoll, letraBranca, expPreencher, formatCenter);
+        g.DrawString(rollText, fontExpAndRoll, letraBranca, rollPreencher, formatCenter);
 
 
 
