@@ -8,6 +8,21 @@ using System.Windows.Forms;
 int gold = 43;
 int enemyGold = 22;
 
+Campeao DonPlatinado = new Campeao
+(
+    "Don Platinado",
+    5,
+    "Lendario",
+    2000, 
+    100, 
+    4, 
+    new Classes[]{Classes.Desenvolvedores, Classes.Instrutores, Classes.Mecanicos},
+    "assets/imgs/x.png"
+);
+
+List<Campeao> campeaos = new List<Campeao>();
+campeaos.Add(DonPlatinado);
+
 ApplicationConfiguration.Initialize();
 Application.EnableVisualStyles();
 
@@ -48,7 +63,15 @@ Point ajdCenter = Point.Empty;
 
 tm.Tick += (o, e) =>
 {
+    g.Clear(Color.White);
     Front.Desenhar(bmp, g, Cursor.Position, isDown, gold, enemyGold);
+
+    foreach (var item in campeaos)
+        item.Update();
+
+    foreach (var item in campeaos)
+        item.Draw(g);
+
     pb.Refresh();
 };
 
@@ -69,7 +92,10 @@ pb.MouseUp += (o, e) =>
 
 form.KeyDown += (o, e) =>
 {
-
+    if (DonPlatinado.ActualState == State.Batendo)
+        DonPlatinado.ActualState = State.Andando;
+    else if (DonPlatinado.ActualState == State.Andando)
+        DonPlatinado.ActualState = State.Batendo;
 };
 
 Application.Run(form);

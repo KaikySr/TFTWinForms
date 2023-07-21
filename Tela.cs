@@ -5,13 +5,14 @@ public static class Front
 {
     public static void Desenhar(Bitmap bmp, Graphics g, Point cursor, bool isDown, int gold, int goldEnemy)
     {
-        //Canetas
+        #region Canetas
         Pen canetaPreta = new Pen(Brushes.Black, 5f);
         Pen canetaDourada = new Pen(Brushes.DarkGoldenrod, 5f);
         Pen canetaVermelha = new Pen(Brushes.Red, 5f);
         Pen canetaBranca = new Pen(Brushes.WhiteSmoke, 5f);
+        #endregion
 
-        //Pinceis
+        #region Pinceis
         SolidBrush fundoShop = new SolidBrush(Color.FromArgb(41, 41, 41));
         Brush fundoAzul = Brushes.DarkBlue;
         Brush rollBrush = Brushes.DarkGoldenrod;
@@ -22,8 +23,9 @@ public static class Front
         //     new Point(5 + larguraBotao * 4, alturaMolduraMarrom + 25 + alturaBotao),
         //     Color.FromArgb(255,42,72,88),  
         //     Color.FromArgb(255,8,159,143));
+        #endregion
 
-        //Variaveis para tamanhos e posicionamentos
+        #region Variaveis para tamanhos e posicionamentos
         int linha = 10;
 
         int larguraArena = (int)(0.700f * bmp.Width) - 3;
@@ -61,6 +63,9 @@ public static class Front
         int larguraComps = (bmp.Width - larguraArena - (larguraMyGold * 3)) / 2;
         int alturaComps = alturaMyGold - ((alturaMyGold/5) * 2);
 
+        int larguraBuffs = (int)(0.010 * bmp. Width);
+        int alturaBuffs = (((alturaComps/3) - 15) / 2) / 2;
+
 
         int point0LargArena = (bmp.Width - larguraArena) / 2;
         int point0AltArena = (int)(0.010 * bmp.Height);
@@ -79,9 +84,10 @@ public static class Front
 
         int point0LargComps = 5;
         int point0AltComps = point0AltMyGold + (alturaMyGold/5) + 5;
+        #endregion
 
-        //Molduras 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Molduras
+        
         Rectangle arena = new Rectangle(point0LargArena, point0AltArena, larguraArena, alturaArena);
 
         Rectangle comps = new Rectangle(point0LargComps, point0AltComps, larguraComps, alturaComps);
@@ -90,16 +96,29 @@ public static class Front
         Rectangle devsQnt = new Rectangle(point0LargComps, point0AltComps, larguraComps/3,(alturaComps/3) - 15);
         Rectangle devsNome = new Rectangle((point0LargComps + larguraComps/3), point0AltComps, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
         Rectangle devsBuffs = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        Rectangle devBuff1 = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle devBuff2 = new Rectangle((point0LargComps + larguraComps/3) + larguraBuffs, (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle devBuff3 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 2), (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle devBuff4 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 3), (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle devBuff5 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 4), (point0AltComps + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
 
         Rectangle instrutores = new Rectangle(point0LargComps, point0AltComps + alturaComps/3, larguraComps, (alturaComps/3) - 15);
         Rectangle instrutoresQnt = new Rectangle(point0LargComps, point0AltComps + alturaComps/3, larguraComps/3,(alturaComps/3) - 15);
         Rectangle instrutoresNome = new Rectangle((point0LargComps + larguraComps/3), point0AltComps + alturaComps/3 , (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
         Rectangle instrutoresBuffs = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + alturaComps/3 + ((alturaComps/3) - 15) / 2) + 1, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        Rectangle instrutoresBuff1 = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + alturaComps/3 + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle instrutoresBuff2 = new Rectangle((point0LargComps + larguraComps/3) + larguraBuffs, (point0AltComps + alturaComps/3 + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle instrutoresBuff3 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 2), (point0AltComps + alturaComps/3 + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
 
         Rectangle mecanicos = new Rectangle(point0LargComps, point0AltComps + ((alturaComps/3) * 2), larguraComps, (alturaComps/3) - 15);
         Rectangle mecanicosQnt = new Rectangle(point0LargComps, point0AltComps + ((alturaComps/3) * 2), larguraComps/3,(alturaComps/3) - 15);
         Rectangle mecanicosNome = new Rectangle((point0LargComps + larguraComps/3), point0AltComps + ((alturaComps/3) * 2), (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
         Rectangle mecanicosBuffs = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, (larguraComps/3) * 2,((alturaComps/3) - 15) / 2);
+        Rectangle mecanicosBuff1 = new Rectangle((point0LargComps + larguraComps/3), (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle mecanicosBuff2 = new Rectangle((point0LargComps + larguraComps/3) + larguraBuffs, (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle mecanicosBuff3 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 2), (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle mecanicosBuff4 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 3), (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
+        Rectangle mecanicosBuff5 = new Rectangle((point0LargComps + larguraComps/3) + (larguraBuffs * 4), (point0AltComps + ((alturaComps/3) * 2) + ((alturaComps/3) - 15) / 2) + 1, larguraBuffs, alturaBuffs);
         
 
         Rectangle round = new Rectangle(point0LargRound, point0AltRound, larguraRound, alturaRound);
@@ -165,9 +184,10 @@ public static class Front
 
         Rectangle lockShopArea = new Rectangle(point0LargShop + larguraShop, point0AltShop, larguraLockShop, alturaLockShop);
         Rectangle lockShop = new Rectangle(point0LargShop + larguraShop + 5, point0AltShop + 5, larguraLockShop - linha, alturaLockShop - linha);
-
-        //Preencher
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #endregion
+        
+        #region Preencher
+        
         Rectangle expPreencher = new Rectangle(point0LargShop + linha + 3, point0AltShop + linha + 3,  larguraExpAndRoll - 5, alturaExpAndRoll - 5);
         Rectangle rollPreencher = new Rectangle(point0LargShop + linha + 3, point0AltShop + alturaExpAndRoll + 23, larguraExpAndRoll - 5, alturaExpAndRoll - 5);
         
@@ -182,9 +202,10 @@ public static class Front
         Rectangle enemyGold3Preencher = new Rectangle(point0LargArena + larguraArena + 5, point0AltMyGold + ((alturaMyGold / 5) * 2) + 5 ,larguraMyGold - 10, (alturaMyGold / 5) - 10);
         Rectangle enemyGold4Preencher = new Rectangle(point0LargArena + larguraArena + 5, point0AltMyGold + ((alturaMyGold / 5) * 3) + 5 ,larguraMyGold - 10, (alturaMyGold / 5) - 10);
         Rectangle enemyGold5Preencher = new Rectangle(point0LargArena + larguraArena + 5, point0AltMyGold + ((alturaMyGold / 5) * 4) + 5 ,larguraMyGold - 10, (alturaMyGold / 5) - 10);
-
-        //Escritas//
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #endregion
+       
+        #region Escritas
+        
         SolidBrush letraBranca = new SolidBrush(Color.White);
 
         StringFormat formatCenter = new StringFormat();
@@ -195,9 +216,9 @@ public static class Front
         formatLeftDown.Alignment = StringAlignment.Near;
         formatLeftDown.LineAlignment = StringAlignment.Far;
 
-        StringFormat formatLeftUp = new StringFormat();
-        formatLeftUp.Alignment = StringAlignment.Near;
-        formatLeftUp.LineAlignment = StringAlignment.Near;
+        StringFormat formatLeftCenter = new StringFormat();
+        formatLeftCenter.Alignment = StringAlignment.Near;
+        formatLeftCenter.LineAlignment = StringAlignment.Center;
 
         String expText = "Comprar EXP 4";
         String rollText = "Atualizar 2";
@@ -205,41 +226,63 @@ public static class Front
 
         String devsQntTxt = "2";
         String devsNomeTxt = "Desenvolvedores";
-        String devsBuffsTxt = "2 - 4 - 5";
+        String devsBuffsTxt1 = "2";
+        String devsBuffsTxt2 = "-";
+        String devsBuffsTxt3 = "4";
+        String devsBuffsTxt4 = "-";
+        String devsBuffsTxt5 = "5";
+
 
         String instrutoresQntTxt = "3";
         String instrutoresNomeTxt = "Instrutores";
-        String instrutoresBuffsTxt = "3 - 5";
+        String instrutoresBuffsTxt1 = "3";
+        String instrutoresBuffsTxt2 = "-";
+        String instrutoresBuffsTxt3 = "5";
 
         String mecanicosQntTxt = "1";
         String mecanicosNomeTxt = "Mecanicos";
-        String mecanicosBuffsTxt = "1 - 2 - 3";
+        String mecanicosBuffsTxt1 = "1";
+        String mecanicosBuffsTxt2 = "-";
+        String mecanicosBuffsTxt3 = "2";
+        String mecanicosBuffsTxt4 = "-";
+        String mecanicosBuffsTxt5 = "3";
 
         Font fontQnt = new Font("Arial", (int)(0.300 * ((alturaComps/3) - 15)));
         Font fontNomeAndBuffs = new Font("Arial", ((int)(0.350 * ((alturaComps/3) - 15)) / 2));
+        #endregion
 
-        //Layout//
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region Layout
+        
         g.DrawRectangle(canetaPreta, arena);
 
         g.FillRectangle(fundoShop, devs);
         g.DrawRectangle(canetaPreta, devs);
         g.DrawString(devsQntTxt, fontQnt, letraBranca, devsQnt, formatCenter);
         g.DrawString(devsNomeTxt, fontNomeAndBuffs, letraBranca, devsNome, formatLeftDown);
-        g.DrawString(devsBuffsTxt, fontNomeAndBuffs, letraBranca, devsBuffs, formatLeftUp);
+        g.DrawString(devsBuffsTxt1, fontNomeAndBuffs, letraBranca, devBuff1, formatLeftCenter);
+        g.DrawString(devsBuffsTxt2, fontNomeAndBuffs, letraBranca, devBuff2, formatLeftCenter);
+        g.DrawString(devsBuffsTxt3, fontNomeAndBuffs, letraBranca, devBuff3, formatLeftCenter);
+        g.DrawString(devsBuffsTxt4, fontNomeAndBuffs, letraBranca, devBuff4, formatLeftCenter);
+        g.DrawString(devsBuffsTxt5, fontNomeAndBuffs, letraBranca, devBuff5, formatLeftCenter);
 
         g.FillRectangle(fundoShop, instrutores);
         g.DrawRectangle(canetaPreta, instrutores);
         g.DrawString(instrutoresQntTxt, fontQnt, letraBranca, instrutoresQnt, formatCenter);
         g.DrawString(instrutoresNomeTxt, fontNomeAndBuffs, letraBranca, instrutoresNome, formatLeftDown);
-        g.DrawString(instrutoresBuffsTxt, fontNomeAndBuffs, letraBranca, instrutoresBuffs, formatLeftUp);
+        g.DrawString(instrutoresBuffsTxt1, fontNomeAndBuffs, letraBranca, instrutoresBuff1, formatLeftCenter);
+        g.DrawString(instrutoresBuffsTxt2, fontNomeAndBuffs, letraBranca, instrutoresBuff2, formatLeftCenter);
+        g.DrawString(instrutoresBuffsTxt3, fontNomeAndBuffs, letraBranca, instrutoresBuff3, formatLeftCenter);
 
         g.FillRectangle(fundoShop, mecanicos);
         g.DrawRectangle(canetaPreta, mecanicos);
         g.DrawString(mecanicosQntTxt, fontQnt, letraBranca, mecanicosQnt, formatCenter);
         g.DrawString(mecanicosNomeTxt, fontNomeAndBuffs, letraBranca, mecanicosNome, formatLeftDown);
-        g.DrawString(mecanicosBuffsTxt, fontNomeAndBuffs, letraBranca, mecanicosBuffs, formatLeftUp);
-
+        g.DrawString(mecanicosBuffsTxt1, fontNomeAndBuffs, letraBranca, mecanicosBuff1, formatLeftCenter);
+        g.DrawString(mecanicosBuffsTxt2, fontNomeAndBuffs, letraBranca, mecanicosBuff2, formatLeftCenter);
+        g.DrawString(mecanicosBuffsTxt3, fontNomeAndBuffs, letraBranca, mecanicosBuff3, formatLeftCenter);
+        g.DrawString(mecanicosBuffsTxt4, fontNomeAndBuffs, letraBranca, mecanicosBuff4, formatLeftCenter);
+        g.DrawString(mecanicosBuffsTxt5, fontNomeAndBuffs, letraBranca, mecanicosBuff5, formatLeftCenter);
+  
         g.DrawRectangle(canetaPreta, round);
 
         g.FillRectangle(fundoAzul, timer);
@@ -377,20 +420,16 @@ public static class Front
         g.DrawRectangle(canetaPreta, lockShop);
 
         g.DrawRectangle(canetaDourada, shop);
+        #endregion
 
 
-
-
-      
-
-        // Exemplo para mudar de cor ao clicar/passar o mouse
-            // g.DrawRectangle(canetaPreta, arena);
-            // if (arena.Contains(cursor))
-            // {
-            //     g.FillRectangle(Brushes.Red, arena);
-            //     if(arena.Contains(cursor) && isDown == true)
-            //         g.FillRectangle(Brushes.Blue, arena);
-            // }
-
+    // Exemplo para mudar de cor ao clicar/passar o mouse
+        // g.DrawRectangle(canetaPreta, arena);
+        // if (arena.Contains(cursor))
+        // {
+        //     g.FillRectangle(Brushes.Red, arena);
+        //     if(arena.Contains(cursor) && isDown == true)
+        //         g.FillRectangle(Brushes.Blue, arena);
+        // }
     }
 }
