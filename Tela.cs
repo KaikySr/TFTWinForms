@@ -179,7 +179,6 @@ public static class Front
         Rectangle buyExp = new Rectangle(point0LargShop + linha, point0AltShop + linha, larguraExpAndRoll, alturaExpAndRoll);
         Rectangle roll = new Rectangle(point0LargShop + linha, point0AltShop + alturaExpAndRoll + 20, larguraExpAndRoll, alturaExpAndRoll);
 
-        
         Rectangle slot1Total = new Rectangle(point0LargShop + larguraSlot + linha, point0AltShop + 5, larguraSlot, alturaSlot);
         Rectangle slot2Total  = new Rectangle(point0LargShop + (larguraSlot * 2) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
         Rectangle slot3Total  = new Rectangle(point0LargShop + (larguraSlot * 3) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
@@ -221,7 +220,6 @@ public static class Front
         Slots.Add(slot3);
         Slots.Add(slot4);
         Slots.Add(slot5);
-        // Rectangle slot1Preencher = new Rectangle
         #endregion
        
         #region Escritas
@@ -273,7 +271,7 @@ public static class Front
 
         #region Layout
 
-        if(lockShop.Contains(cursor) && isDown == true)
+        if(lockShop.Contains(cursor) && isDown == true) 
             locked = !locked;
         
         if (locked)

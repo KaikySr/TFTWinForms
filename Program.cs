@@ -19,7 +19,7 @@ Campeao DonPlatinado = new Campeao
     100, 
     4, 
     new Classes[]{Classes.Desenvolvedores, Classes.Instrutores, Classes.Mecanicos},
-    "assets/imgs/x.png",
+    "assets/imgs/sprite.png",
     Front.Slots
 );
 
@@ -159,7 +159,6 @@ Bitmap bmp = null;
 Graphics g = null; 
 Point cursor = Point.Empty;
 bool isDown = false;
-bool clicked = false;
 
 PictureBox pb = new PictureBox();
 pb.Dock = DockStyle.Fill;
@@ -177,27 +176,19 @@ form.KeyDown += (o, e) =>
     }
 };
 
-form.Click += (o, e) =>
-{
-    if ()
-};
-
 form.Load += (o, e) =>
 {
     bmp = new Bitmap(pb.Width, pb.Height);
     pb.Image = bmp;
     g = Graphics.FromImage(bmp);
     tm.Start();
-
-    // DonPlatinado.ActualSlot = DonPlatinado.Slots[0];
-    // Kaiky.ActualSlot = Kaiky.Slots[1];
 };
 
 Point ajdCenter = Point.Empty;
 
 tm.Tick += (o, e) =>
 {
-    g.Clear(Color.White);
+     g.Clear(Color.White);
     Front.Desenhar(bmp, g, Cursor.Position, isDown, gold, enemyGold);
 
     foreach (var item in campeaos)
