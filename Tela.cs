@@ -4,6 +4,7 @@ using System.Drawing.Drawing2D;
 public static class Front
 {
     public static List<Rectangle> Slots { get; private set; } = new List<Rectangle>();
+    public static bool locked = false;
     public static void Desenhar(Bitmap bmp, Graphics g, Point cursor, bool isDown, int gold, int goldEnemy)
     {
         #region Canetas
@@ -24,6 +25,11 @@ public static class Front
         //     new Point(5 + larguraBotao * 4, alturaMolduraMarrom + 25 + alturaBotao),
         //     Color.FromArgb(255,42,72,88),  
         //     Color.FromArgb(255,8,159,143));
+        #endregion
+
+        #region Imagens
+        Bitmap lockCloseImg = new Bitmap("assets/imgs/lockClose.png");
+        Bitmap lockOpenImg = new Bitmap("assets/imgs/lockOpen.png");
         #endregion
 
         #region Variaveis para tamanhos e posicionamentos
@@ -174,16 +180,11 @@ public static class Front
         Rectangle roll = new Rectangle(point0LargShop + linha, point0AltShop + alturaExpAndRoll + 20, larguraExpAndRoll, alturaExpAndRoll);
 
         
-        Rectangle slot1 = new Rectangle(point0LargShop + larguraSlot + linha, point0AltShop + 5, larguraSlot, alturaSlot);
-        Rectangle slot2 = new Rectangle(point0LargShop + (larguraSlot * 2) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
-        Rectangle slot3 = new Rectangle(point0LargShop + (larguraSlot * 3) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
-        Rectangle slot4 = new Rectangle(point0LargShop + (larguraSlot * 4) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
-        Rectangle slot5 = new Rectangle(point0LargShop + (larguraSlot * 5) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
-        Slots.Add(slot1);
-        Slots.Add(slot2);
-        Slots.Add(slot3);
-        Slots.Add(slot4);
-        Slots.Add(slot5);
+        Rectangle slot1Total = new Rectangle(point0LargShop + larguraSlot + linha, point0AltShop + 5, larguraSlot, alturaSlot);
+        Rectangle slot2Total  = new Rectangle(point0LargShop + (larguraSlot * 2) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
+        Rectangle slot3Total  = new Rectangle(point0LargShop + (larguraSlot * 3) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
+        Rectangle slot4Total  = new Rectangle(point0LargShop + (larguraSlot * 4) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
+        Rectangle slot5Total  = new Rectangle(point0LargShop + (larguraSlot * 5) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
 
 
         Rectangle statsArea = new Rectangle(point0LargShop - larguraStats, point0AltShop, larguraStats, alturaStats);
@@ -210,6 +211,16 @@ public static class Front
         Rectangle enemyGold4Preencher = new Rectangle(point0LargArena + larguraArena + 5, point0AltMyGold + ((alturaMyGold / 5) * 3) + 5 ,larguraMyGold - 10, (alturaMyGold / 5) - 10);
         Rectangle enemyGold5Preencher = new Rectangle(point0LargArena + larguraArena + 5, point0AltMyGold + ((alturaMyGold / 5) * 4) + 5 ,larguraMyGold - 10, (alturaMyGold / 5) - 10);
 
+        Rectangle slot1 = new Rectangle(point0LargShop + larguraSlot + (linha * 2), point0AltShop + 5 + linha, larguraSlot - (linha * 2), alturaSlot - (linha * 2));
+        Rectangle slot2 = new Rectangle(point0LargShop + (larguraSlot * 2) + (linha * 2), point0AltShop + 5 + linha, larguraSlot - (linha * 2), alturaSlot - (linha * 2));
+        Rectangle slot3 = new Rectangle(point0LargShop + (larguraSlot * 3) + (linha * 2), point0AltShop + 5 + linha, larguraSlot - (linha * 2), alturaSlot - (linha * 2));
+        Rectangle slot4 = new Rectangle(point0LargShop + (larguraSlot * 4) + (linha * 2), point0AltShop + 5 + linha, larguraSlot - (linha * 2), alturaSlot - (linha * 2));
+        Rectangle slot5 = new Rectangle(point0LargShop + (larguraSlot * 5) + (linha * 2), point0AltShop + 5 + linha, larguraSlot - (linha * 2), alturaSlot - (linha * 2));
+        Slots.Add(slot1);
+        Slots.Add(slot2);
+        Slots.Add(slot3);
+        Slots.Add(slot4);
+        Slots.Add(slot5);
         // Rectangle slot1Preencher = new Rectangle
         #endregion
        
@@ -261,6 +272,15 @@ public static class Front
         #endregion
 
         #region Layout
+
+        if(lockShop.Contains(cursor) && isDown == true)
+            locked = !locked;
+        
+        if (locked)
+            g.DrawImage(lockCloseImg, lockShop);
+        else
+            g.DrawImage(lockOpenImg, lockShop);
+
         
         g.DrawRectangle(canetaPreta, arena);
 
@@ -396,14 +416,6 @@ public static class Front
 
         g.DrawRectangle(canetaPreta, levelAndRollEdge);
 
-        g.DrawRectangle(canetaPreta, slot1);
-        g.DrawRectangle(canetaPreta, slot2);
-        g.DrawRectangle(canetaPreta, slot3);
-        g.DrawRectangle(canetaPreta, slot4);
-        g.DrawRectangle(canetaPreta, slot5);
-
-
-
         if (gold >= 4)
             g.FillRectangle(fundoAzul, buyExp);
         else 
@@ -428,6 +440,9 @@ public static class Front
         g.DrawRectangle(canetaDourada, lockShopArea);
         g.DrawRectangle(canetaPreta, lockShop);
 
+        
+        
+     
         g.DrawRectangle(canetaDourada, shop);
         #endregion
 

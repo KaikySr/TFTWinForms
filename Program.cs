@@ -25,7 +25,7 @@ Campeao DonPlatinado = new Campeao
 
 Campeao Trevisan = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/trevisan.jpg",
     "Trevisan",
     4,
     "Epico",
@@ -39,7 +39,7 @@ Campeao Trevisan = new Campeao
 
 Campeao Andressa = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/andressa.jpg",
     "Andressa",
     4,
     "Epico",
@@ -53,7 +53,7 @@ Campeao Andressa = new Campeao
 
 Campeao Thigas = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/thiago.jpg",
     "Thigas",
     2,
     "Raro",
@@ -81,7 +81,7 @@ Campeao Kaiky = new Campeao
 
 Campeao Queila = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/queila.jpg",
     "Queila",
     2,
     "Raro",
@@ -95,7 +95,7 @@ Campeao Queila = new Campeao
 
 Campeao Luis = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/luis.jpg",
     "Luis",
     1,
     "Comum",
@@ -109,7 +109,7 @@ Campeao Luis = new Campeao
 
 Campeao Alisson = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/alisson.jpg",
     "Alisson",
     1,
     "Comum",
@@ -123,7 +123,7 @@ Campeao Alisson = new Campeao
 
 Campeao Fabio = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/fabio.jpg",
     "Fabio",
     1,
     "Comum",
@@ -131,6 +131,7 @@ Campeao Fabio = new Campeao
     30, 
     2, 
     new Classes[]{Classes.Mecanicos},
+
     "assets/imgs/x.png",
     Front.Slots
 );
@@ -138,7 +139,14 @@ Campeao Fabio = new Campeao
 
 List<Campeao> campeaos = new List<Campeao>();
 campeaos.Add(DonPlatinado);
+campeaos.Add(Trevisan);
+campeaos.Add(Andressa);
+campeaos.Add(Thigas);
 campeaos.Add(Kaiky);
+campeaos.Add(Queila);
+campeaos.Add(Luis);
+campeaos.Add(Alisson);
+campeaos.Add(Fabio);
 
 ApplicationConfiguration.Initialize();
 Application.EnableVisualStyles();
@@ -151,6 +159,7 @@ Bitmap bmp = null;
 Graphics g = null; 
 Point cursor = Point.Empty;
 bool isDown = false;
+bool clicked = false;
 
 PictureBox pb = new PictureBox();
 pb.Dock = DockStyle.Fill;
@@ -166,6 +175,11 @@ form.KeyDown += (o, e) =>
     {
         Application.Exit();
     }
+};
+
+form.Click += (o, e) =>
+{
+    if ()
 };
 
 form.Load += (o, e) =>
@@ -194,12 +208,16 @@ tm.Tick += (o, e) =>
 
     DonPlatinado.ActualSlot = DonPlatinado.Slots[0];
     Kaiky.ActualSlot = Kaiky.Slots[1];
+    Trevisan.ActualSlot = Trevisan.Slots[2];
+    Thigas.ActualSlot = Thigas.Slots[3];
+    Alisson.ActualSlot = Alisson.Slots[4];
 
-
-
-    DonPlatinado.ActualState = State.Banco;
-    Kaiky.ActualState = State.Banco;
-
+    DonPlatinado.ActualState = State.Shop;
+    Kaiky.ActualState = State.Shop;
+    Trevisan.ActualState = State.Shop;
+    Thigas.ActualState = State.Shop;
+    Alisson.ActualState = State.Shop;
+   
     pb.Refresh();
 };
 

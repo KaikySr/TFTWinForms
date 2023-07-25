@@ -49,7 +49,7 @@ public class Campeao
 
     public void Draw(Graphics g)
     {
-        if (ActualState == State.Banco)
+        if (ActualState == State.Shop)
             g.DrawImage
             (
                 ShopImage,
@@ -108,6 +108,14 @@ public class Campeao
                 new Rectangle(0, 0, 0, 0)
             }
         );
+
+         srcRect.Add
+        (
+            State.Shop,
+            new List<Rectangle>(){
+                new Rectangle(0, 0, 0, 0)
+            }
+        );
     }
 
 }
@@ -123,5 +131,6 @@ public enum State
 {
     Banco,
     Andando,
-    Batendo
+    Batendo,
+    Shop
 }
