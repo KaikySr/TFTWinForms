@@ -191,9 +191,11 @@ public static class Front
         Rectangle statsArea = new Rectangle(point0LargShop - larguraStats, point0AltShop, larguraStats, alturaStats);
         Rectangle stats = new Rectangle(point0LargShop - larguraStats + 5, point0AltShop + 5, larguraStats - linha, alturaStats - linha);
         Rectangle statsLvl = new Rectangle(point0LargShop - larguraStats + 5,point0AltShop + 5, larguraStats - linha,(alturaStats - linha)/3);
+        Rectangle statsLvlPreencher = new Rectangle(point0LargShop - larguraStats + 5 + 5,point0AltShop + 5 + 5, larguraStats - linha - 10,((alturaStats - linha)/3)-10);
         Rectangle statsLvlProgress = new Rectangle(point0LargShop - larguraStats + 5,point0AltShop + 5 + (alturaStats - linha)/3,larguraStats - linha,(alturaStats - linha)/3);
         Rectangle progress = new Rectangle(point0LargShop - larguraStats + 15,point0AltShop + 5 + (alturaStats - linha)/3,larguraStats - linha - 20,((alturaStats - linha)/3)/3);
         Rectangle statsGold = new Rectangle(point0LargShop - larguraStats + 5,point0AltShop + 5 + (((alturaStats - linha)/3)*2),larguraStats - linha,(alturaStats - linha)/3);
+        Rectangle statsGoldPreencher = new Rectangle(point0LargShop - larguraStats + 5 + 5,point0AltShop + 5 + (((alturaStats - linha)/3)*2) + 5,larguraStats - linha - 10,((alturaStats - linha)/3) - 10);
 
 
         Rectangle lockShopArea = new Rectangle(point0LargShop + larguraShop, point0AltShop, larguraLockShop, alturaLockShop);
@@ -238,17 +240,25 @@ public static class Front
         formatCenter.Alignment = StringAlignment.Center;
         formatCenter.LineAlignment = StringAlignment.Center;
 
+        StringFormat formatCenterTop = new StringFormat();
+        formatCenterTop.Alignment = StringAlignment.Center;
+        formatCenterTop.LineAlignment = StringAlignment.Near;
+
         StringFormat formatLeftDown = new StringFormat();
         formatLeftDown.Alignment = StringAlignment.Near;
         formatLeftDown.LineAlignment = StringAlignment.Far;
 
         StringFormat formatLeftCenter = new StringFormat();
-        formatLeftCenter.Alignment = StringAlignment.Center;
+        formatLeftCenter.Alignment = StringAlignment.Near;
         formatLeftCenter.LineAlignment = StringAlignment.Center;
 
+        StringFormat formatRigthCenter = new StringFormat();
+        formatRigthCenter.Alignment = StringAlignment.Far;
+        formatRigthCenter.LineAlignment = StringAlignment.Center;
+
         StringFormat formatLeftTop = new StringFormat();
-        formatLeftCenter.Alignment = StringAlignment.Near;
-        formatLeftCenter.LineAlignment = StringAlignment.Near;
+        formatLeftTop.Alignment = StringAlignment.Near;
+        formatLeftTop.LineAlignment = StringAlignment.Near;
 
         String expText = "Comprar EXP 4";
         String rollText = "Atualizar 2";
@@ -278,11 +288,14 @@ public static class Front
         String mecanicosBuffsTxt5 = "3";
 
         String statsNv = "Nv. 6";
-        String statsGd = Convert.ToString(gold);
+        String statsNvProgress = "6/30";
+        String statsGd = $"Gold: {Convert.ToString(gold)}";
+        
 
         Font fontQnt = new Font("Arial", (int)(0.300 * ((alturaComps/3) - 15)));
         Font fontNomeAndBuffs = new Font("Arial", ((int)(0.350 * ((alturaComps/3) - 15)) / 2));
-        Font fontStats = new Font("Arial", ((int)(0.350 * ((alturaStats/3) - 15)) / 2));
+        Font fontStats = new Font("Arial", ((int)(0.350 * alturaStats/3)));
+        Font fontStatsProgress = new Font("Arial", ((int)(0.250 * alturaStats/3)));
         #endregion
 
         #region Layout
@@ -454,9 +467,10 @@ public static class Front
 
 
         g.DrawRectangle(canetaDourada, statsArea);
-        g.DrawString(statsNv, fontExpAndRoll, letraPreta, statsLvl, formatLeftCenter);
+        g.DrawString(statsNv, fontStats, letraPreta, statsLvlPreencher, formatLeftCenter);
+        g.DrawString(statsNvProgress, fontStatsProgress, letraPreta, statsLvlPreencher, formatRigthCenter);
         g.DrawRectangle(canetaPreta, progress);
-        g.DrawString(statsGd, fontExpAndRoll, letraPreta, statsGold, formatLeftTop);
+        g.DrawString(statsGd, fontStats, letraPreta, statsGoldPreencher, formatLeftTop);
         g.DrawRectangle(canetaPreta, stats);
         
         g.DrawRectangle(canetaDourada, lockShopArea);

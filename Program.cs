@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-int gold = 43;
+int gold = 4;
 int enemyGold = 22;
 int indexAleatorio;
 bool teste = true;
@@ -191,6 +191,8 @@ form.Load += (o, e) =>
         roletar();
     };
 
+    gold = gold + 2;
+
 
     tm.Start();
 };
@@ -242,16 +244,20 @@ form.KeyDown += (o, e) =>
 
 void roletar()
 {
-    foreach (var champ in campeaos)
-        champ.ActualSlot.Clear();
-
-
-    for (int i = 0; i < 5; i++)
+    if(gold >= 2)
     {
-        indexAleatorio = rand.Next(9);
-    
-        campeaos[indexAleatorio].ActualSlot.Add(campeaos[indexAleatorio].Slots[i]);
-        campeaos[indexAleatorio].ActualState = State.Shop;
+        foreach (var champ in campeaos)
+            champ.ActualSlot.Clear();
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            indexAleatorio = rand.Next(9);
+        
+            campeaos[indexAleatorio].ActualSlot.Add(campeaos[indexAleatorio].Slots[i]);
+            campeaos[indexAleatorio].ActualState = State.Shop;
+        }
+        gold = gold - 2;
     }
 }
 
