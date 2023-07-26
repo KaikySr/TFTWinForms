@@ -177,11 +177,6 @@ form.KeyDown += (o, e) =>
     }
 };
 
-form.Click += (o, e) =>
-{
-    if ()
-};
-
 form.Load += (o, e) =>
 {
     bmp = new Bitmap(pb.Width, pb.Height);
@@ -243,6 +238,15 @@ form.KeyDown += (o, e) =>
     else if (DonPlatinado.ActualState == State.Andando)
         DonPlatinado.ActualState = State.Batendo;
 };
+
+// form.Click += (o, e) =>
+// {
+//     if (isDown = true)
+//     {
+//         if (isDown = false)
+//             clicked = true;
+//     }
+// };
 
 Application.Run(form);
 
