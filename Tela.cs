@@ -5,6 +5,8 @@ public static class Front
 {
     public static List<Rectangle> Slots { get; private set; } = new List<Rectangle>();
     public static bool locked = false;
+
+    private static bool updateMouseDown = false;
     public static void Desenhar(Bitmap bmp, Graphics g, Point cursor, bool isDown, int gold, int goldEnemy)
     {
         #region Canetas
@@ -179,7 +181,6 @@ public static class Front
         Rectangle buyExp = new Rectangle(point0LargShop + linha, point0AltShop + linha, larguraExpAndRoll, alturaExpAndRoll);
         Rectangle roll = new Rectangle(point0LargShop + linha, point0AltShop + alturaExpAndRoll + 20, larguraExpAndRoll, alturaExpAndRoll);
 
-        
         Rectangle slot1Total = new Rectangle(point0LargShop + larguraSlot + linha, point0AltShop + 5, larguraSlot, alturaSlot);
         Rectangle slot2Total  = new Rectangle(point0LargShop + (larguraSlot * 2) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
         Rectangle slot3Total  = new Rectangle(point0LargShop + (larguraSlot * 3) + linha, point0AltShop + 5, larguraSlot, alturaSlot);
@@ -189,6 +190,11 @@ public static class Front
 
         Rectangle statsArea = new Rectangle(point0LargShop - larguraStats, point0AltShop, larguraStats, alturaStats);
         Rectangle stats = new Rectangle(point0LargShop - larguraStats + 5, point0AltShop + 5, larguraStats - linha, alturaStats - linha);
+        Rectangle statsLvl = new Rectangle(point0LargShop - larguraStats + 5,point0AltShop + 5, larguraStats - linha,(alturaStats - linha)/3);
+        Rectangle statsLvlProgress = new Rectangle(point0LargShop - larguraStats + 5,point0AltShop + 5 + (alturaStats - linha)/3,larguraStats - linha,(alturaStats - linha)/3);
+        Rectangle progress = new Rectangle(point0LargShop - larguraStats + 15,point0AltShop + 5 + (alturaStats - linha)/3,larguraStats - linha - 20,((alturaStats - linha)/3)/3);
+        Rectangle statsGold = new Rectangle(point0LargShop - larguraStats + 5,point0AltShop + 5 + (((alturaStats - linha)/3)*2),larguraStats - linha,(alturaStats - linha)/3);
+
 
         Rectangle lockShopArea = new Rectangle(point0LargShop + larguraShop, point0AltShop, larguraLockShop, alturaLockShop);
         Rectangle lockShop = new Rectangle(point0LargShop + larguraShop + 5, point0AltShop + 5, larguraLockShop - linha, alturaLockShop - linha);
@@ -221,12 +227,12 @@ public static class Front
         Slots.Add(slot3);
         Slots.Add(slot4);
         Slots.Add(slot5);
-        // Rectangle slot1Preencher = new Rectangle
         #endregion
        
         #region Escritas
         
         SolidBrush letraBranca = new SolidBrush(Color.White);
+        SolidBrush letraPreta = new SolidBrush(Color.Black);
 
         StringFormat formatCenter = new StringFormat();
         formatCenter.Alignment = StringAlignment.Center;
@@ -237,8 +243,12 @@ public static class Front
         formatLeftDown.LineAlignment = StringAlignment.Far;
 
         StringFormat formatLeftCenter = new StringFormat();
-        formatLeftCenter.Alignment = StringAlignment.Near;
+        formatLeftCenter.Alignment = StringAlignment.Center;
         formatLeftCenter.LineAlignment = StringAlignment.Center;
+
+        StringFormat formatLeftTop = new StringFormat();
+        formatLeftCenter.Alignment = StringAlignment.Near;
+        formatLeftCenter.LineAlignment = StringAlignment.Near;
 
         String expText = "Comprar EXP 4";
         String rollText = "Atualizar 2";
@@ -267,14 +277,24 @@ public static class Front
         String mecanicosBuffsTxt4 = "-";
         String mecanicosBuffsTxt5 = "3";
 
+        String statsNv = "Nv. 6";
+        String statsGd = Convert.ToString(gold);
+
         Font fontQnt = new Font("Arial", (int)(0.300 * ((alturaComps/3) - 15)));
         Font fontNomeAndBuffs = new Font("Arial", ((int)(0.350 * ((alturaComps/3) - 15)) / 2));
+        Font fontStats = new Font("Arial", ((int)(0.350 * ((alturaStats/3) - 15)) / 2));
         #endregion
 
         #region Layout
 
-        if(lockShop.Contains(cursor) && isDown == true)
+        if (lockShop.Contains(cursor) && isDown == true)
+            updateMouseDown = true;
+        
+        if (lockShop.Contains(cursor) && !isDown && updateMouseDown)
+        {
+            updateMouseDown = false;
             locked = !locked;
+        }
         
         if (locked)
             g.DrawImage(lockCloseImg, lockShop);
@@ -433,18 +453,26 @@ public static class Front
         g.DrawString(rollText, fontExpAndRoll, letraBranca, rollPreencher, formatCenter);
 
 
-
         g.DrawRectangle(canetaDourada, statsArea);
+        g.DrawString(statsNv, fontExpAndRoll, letraPreta, statsLvl, formatLeftCenter);
+        g.DrawRectangle(canetaPreta, progress);
+        g.DrawString(statsGd, fontExpAndRoll, letraPreta, statsGold, formatLeftTop);
         g.DrawRectangle(canetaPreta, stats);
-
+        
         g.DrawRectangle(canetaDourada, lockShopArea);
         g.DrawRectangle(canetaPreta, lockShop);
 
-        
-        
-     
         g.DrawRectangle(canetaDourada, shop);
         #endregion
+
+        if (roll.Contains(cursor) && isDown)
+            updateMouseDown = true;
+        
+        if (roll.Contains(cursor) && !isDown && updateMouseDown)
+        {
+            updateMouseDown = false;
+            OnRoll();
+        }
 
 
     // Exemplo para mudar de cor ao clicar/passar o mouse
@@ -456,4 +484,8 @@ public static class Front
         //         g.FillRectangle(Brushes.Blue, arena);
         // }
     }
+
+    public static event Action OnRoll;
+
+    
 }

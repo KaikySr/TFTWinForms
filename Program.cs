@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 int gold = 43;
 int enemyGold = 22;
+int indexAleatorio;
+bool teste = true;
+
+Random rand = Random.Shared;
 
 #region campeoes
 Campeao DonPlatinado = new Campeao
@@ -19,7 +23,7 @@ Campeao DonPlatinado = new Campeao
     100, 
     4, 
     new Classes[]{Classes.Desenvolvedores, Classes.Instrutores, Classes.Mecanicos},
-    "assets/imgs/x.png",
+    "assets/imgs/sprite.png",
     Front.Slots
 );
 
@@ -159,7 +163,6 @@ Bitmap bmp = null;
 Graphics g = null; 
 Point cursor = Point.Empty;
 bool isDown = false;
-bool clicked = false;
 
 PictureBox pb = new PictureBox();
 pb.Dock = DockStyle.Fill;
@@ -182,10 +185,14 @@ form.Load += (o, e) =>
     bmp = new Bitmap(pb.Width, pb.Height);
     pb.Image = bmp;
     g = Graphics.FromImage(bmp);
-    tm.Start();
 
-    // DonPlatinado.ActualSlot = DonPlatinado.Slots[0];
-    // Kaiky.ActualSlot = Kaiky.Slots[1];
+    Front.OnRoll += delegate
+    {
+        roletar();
+    };
+
+
+    tm.Start();
 };
 
 Point ajdCenter = Point.Empty;
@@ -201,17 +208,11 @@ tm.Tick += (o, e) =>
     foreach (var item in campeaos)
         item.Draw(g);
 
-    DonPlatinado.ActualSlot = DonPlatinado.Slots[0];
-    Kaiky.ActualSlot = Kaiky.Slots[1];
-    Trevisan.ActualSlot = Trevisan.Slots[2];
-    Thigas.ActualSlot = Thigas.Slots[3];
-    Alisson.ActualSlot = Alisson.Slots[4];
-
-    DonPlatinado.ActualState = State.Shop;
-    Kaiky.ActualState = State.Shop;
-    Trevisan.ActualState = State.Shop;
-    Thigas.ActualState = State.Shop;
-    Alisson.ActualState = State.Shop;
+    if(teste)
+    {
+        roletar();
+        teste = false;
+    }
    
     pb.Refresh();
 };
@@ -239,14 +240,20 @@ form.KeyDown += (o, e) =>
         DonPlatinado.ActualState = State.Batendo;
 };
 
-// form.Click += (o, e) =>
-// {
-//     if (isDown = true)
-//     {
-//         if (isDown = false)
-//             clicked = true;
-//     }
-// };
+void roletar()
+{
+    foreach (var champ in campeaos)
+        champ.ActualSlot.Clear();
+
+
+    for (int i = 0; i < 5; i++)
+    {
+        indexAleatorio = rand.Next(9);
+    
+        campeaos[indexAleatorio].ActualSlot.Add(campeaos[indexAleatorio].Slots[i]);
+        campeaos[indexAleatorio].ActualState = State.Shop;
+    }
+}
 
 Application.Run(form);
 

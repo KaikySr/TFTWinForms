@@ -14,7 +14,7 @@ public class Campeao
     public Size size { get; set; }
     public Bitmap Sprites { get; set; }
     public Dictionary<State, List<Rectangle>> srcRect { get; set; } = new(); 
-    public Rectangle ActualSlot { get; set; } = new Rectangle();
+    public List<Rectangle> ActualSlot { get; set; } = new List<Rectangle>();
     private Rectangle actualFrame;
     public State ActualState { get; set; } = State.Andando;
 
@@ -50,21 +50,27 @@ public class Campeao
     public void Draw(Graphics g)
     {
         if (ActualState == State.Shop)
-            g.DrawImage
-            (
-                ShopImage,
-                this.ActualSlot,
-                new Rectangle(0,0, ShopImage.Width, ShopImage.Height),
-                GraphicsUnit.Pixel
-            );
+        {
+            foreach (var rect in ActualSlot)
+                g.DrawImage
+                (
+                    ShopImage,
+                    rect,
+                    new Rectangle(0,0, ShopImage.Width, ShopImage.Height),
+                    GraphicsUnit.Pixel
+                );
+        }
         else
-            g.DrawImage
-            (
-                Sprites,
-                this.ActualSlot,
-                actualFrame,
-                GraphicsUnit.Pixel
-            );
+        {
+            foreach (var rect in ActualSlot)
+                g.DrawImage
+                (
+                    Sprites,
+                    rect,
+                    actualFrame,
+                    GraphicsUnit.Pixel
+                );
+        }
 
 
     }
