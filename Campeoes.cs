@@ -52,27 +52,14 @@ public class Campeao
         if (ActualState == State.Shop)
         {
             foreach (var rect in ActualSlot)
-                g.DrawImage
-                (
-                    ShopImage,
-                    rect,
-                    new Rectangle(0,0, ShopImage.Width, ShopImage.Height),
-                    GraphicsUnit.Pixel
-                );
+                g.DrawImage(ShopImage, rect, new Rectangle(0, 0, ShopImage.Width, ShopImage.Height), GraphicsUnit.Pixel);
         }
         else
         {
             foreach (var rect in ActualSlot)
-                g.DrawImage
-                (
-                    Sprites,
-                    rect,
-                    actualFrame,
-                    GraphicsUnit.Pixel
-                );
+         
+                g.DrawImage(Sprites, rect, actualFrame, GraphicsUnit.Pixel);
         }
-
-
     }
 
     void setFrames()

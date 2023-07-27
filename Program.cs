@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-int gold = 43;
+int gold = 22;
 int enemyGold = 22;
 int indexAleatorio;
 bool teste = true;
@@ -15,7 +15,7 @@ Random rand = Random.Shared;
 #region campeoes
 Campeao DonPlatinado = new Campeao
 (
-    "assets/imgs/donplatinado.jpg",
+    "assets/imgs/donplatinado.png",
     "Don Platinado",
     5,
     "Lendario",
@@ -29,7 +29,7 @@ Campeao DonPlatinado = new Campeao
 
 Campeao Trevisan = new Campeao
 (
-    "assets/imgs/trevisan.jpg",
+    "assets/imgs/trevisan.png",
     "Trevisan",
     4,
     "Epico",
@@ -43,7 +43,7 @@ Campeao Trevisan = new Campeao
 
 Campeao Andressa = new Campeao
 (
-    "assets/imgs/andressa.jpg",
+    "assets/imgs/andressa.png",
     "Andressa",
     4,
     "Epico",
@@ -57,7 +57,7 @@ Campeao Andressa = new Campeao
 
 Campeao Thigas = new Campeao
 (
-    "assets/imgs/thiago.jpg",
+    "assets/imgs/thigas.png",
     "Thigas",
     2,
     "Raro",
@@ -71,7 +71,7 @@ Campeao Thigas = new Campeao
 
 Campeao Kaiky = new Campeao
 (
-    "assets/imgs/kaiky.jpg",
+    "assets/imgs/caqui.png",
     "Kaiky",
     1,
     "Comum",
@@ -85,7 +85,7 @@ Campeao Kaiky = new Campeao
 
 Campeao Queila = new Campeao
 (
-    "assets/imgs/queila.jpg",
+    "assets/imgs/queila.png",
     "Queila",
     2,
     "Raro",
@@ -99,7 +99,7 @@ Campeao Queila = new Campeao
 
 Campeao Luis = new Campeao
 (
-    "assets/imgs/luis.jpg",
+    "assets/imgs/luis.png",
     "Luis",
     1,
     "Comum",
@@ -113,7 +113,7 @@ Campeao Luis = new Campeao
 
 Campeao Alisson = new Campeao
 (
-    "assets/imgs/alisson.jpg",
+    "assets/imgs/alisson.png",
     "Alisson",
     1,
     "Comum",
@@ -127,7 +127,7 @@ Campeao Alisson = new Campeao
 
 Campeao Fabio = new Campeao
 (
-    "assets/imgs/fabio.jpg",
+    "assets/imgs/fabio.png",
     "Fabio",
     1,
     "Comum",
@@ -191,6 +191,8 @@ form.Load += (o, e) =>
         roletar();
     };
 
+    gold = gold + 2;
+
 
     tm.Start();
 };
@@ -234,24 +236,42 @@ pb.MouseUp += (o, e) =>
 
 form.KeyDown += (o, e) =>
 {
-    if (DonPlatinado.ActualState == State.Batendo)
-        DonPlatinado.ActualState = State.Andando;
-    else if (DonPlatinado.ActualState == State.Andando)
-        DonPlatinado.ActualState = State.Batendo;
+    if(e.KeyCode == Keys.D1)
+    {
+        
+    }
+    // if (DonPlatinado.ActualState == State.Batendo)
+    //     DonPlatinado.ActualState = State.Andando;
+    // else if (DonPlatinado.ActualState == State.Andando)
+    //     DonPlatinado.ActualState = State.Batendo;
 };
+
+
 
 void roletar()
 {
-    foreach (var champ in campeaos)
-        champ.ActualSlot.Clear();
-
-
-    for (int i = 0; i < 5; i++)
+    if(gold >= 2)
     {
-        indexAleatorio = rand.Next(9);
-    
-        campeaos[indexAleatorio].ActualSlot.Add(campeaos[indexAleatorio].Slots[i]);
-        campeaos[indexAleatorio].ActualState = State.Shop;
+        foreach (var champ in campeaos)
+            champ.ActualSlot.Clear();
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            indexAleatorio = rand.Next(9);
+        
+            campeaos[indexAleatorio].ActualSlot.Add(campeaos[indexAleatorio].Slots[i]);
+            campeaos[indexAleatorio].ActualState = State.Shop;
+        }
+        gold = gold - 2;
+    }
+}
+
+void comprar()
+{
+    for(int i = 0; i < 5; i++)
+    {
+
     }
 }
 
