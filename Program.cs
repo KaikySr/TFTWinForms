@@ -24,7 +24,8 @@ Campeao DonPlatinado = new Campeao
     4, 
     new Classes[]{Classes.Desenvolvedores, Classes.Instrutores, Classes.Mecanicos},
     "assets/imgs/sprite.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Trevisan = new Campeao
@@ -38,7 +39,8 @@ Campeao Trevisan = new Campeao
     4, 
     new Classes[]{Classes.Desenvolvedores, Classes.Instrutores},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Andressa = new Campeao
@@ -52,7 +54,8 @@ Campeao Andressa = new Campeao
     3, 
     new Classes[]{Classes.Desenvolvedores, Classes.Mecanicos},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Thigas = new Campeao
@@ -66,7 +69,8 @@ Campeao Thigas = new Campeao
     2, 
     new Classes[]{Classes.Desenvolvedores},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Kaiky = new Campeao
@@ -80,7 +84,8 @@ Campeao Kaiky = new Campeao
     2, 
     new Classes[]{Classes.Desenvolvedores},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Queila = new Campeao
@@ -94,7 +99,8 @@ Campeao Queila = new Campeao
     3, 
     new Classes[]{Classes.Instrutores},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Luis = new Campeao
@@ -108,7 +114,8 @@ Campeao Luis = new Campeao
     3, 
     new Classes[]{Classes.Instrutores},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Alisson = new Campeao
@@ -122,7 +129,8 @@ Campeao Alisson = new Campeao
     3, 
     new Classes[]{Classes.Instrutores},
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 
 Campeao Fabio = new Campeao
@@ -137,20 +145,21 @@ Campeao Fabio = new Campeao
     new Classes[]{Classes.Mecanicos},
 
     "assets/imgs/x.png",
-    Front.Slots
+    Front.Slots,
+    Front.Bancos
 );
 #endregion
 
-List<Campeao> campeaos = new List<Campeao>();
-campeaos.Add(DonPlatinado);
-campeaos.Add(Trevisan);
-campeaos.Add(Andressa);
-campeaos.Add(Thigas);
-campeaos.Add(Kaiky);
-campeaos.Add(Queila);
-campeaos.Add(Luis);
-campeaos.Add(Alisson);
-campeaos.Add(Fabio);
+List<Campeao> campeoes = new List<Campeao>();
+campeoes.Add(DonPlatinado);
+campeoes.Add(Trevisan);
+campeoes.Add(Andressa);
+campeoes.Add(Thigas);
+campeoes.Add(Kaiky);
+campeoes.Add(Queila);
+campeoes.Add(Luis);
+campeoes.Add(Alisson);
+campeoes.Add(Fabio);
 
 ApplicationConfiguration.Initialize();
 Application.EnableVisualStyles();
@@ -202,12 +211,12 @@ Point ajdCenter = Point.Empty;
 tm.Tick += (o, e) =>
 {
     g.Clear(Color.White);
-    Front.Desenhar(bmp, g, Cursor.Position, isDown, gold, enemyGold);
+    Front.Desenhar(bmp, g, Cursor.Position, isDown, gold, enemyGold, campeoes);
 
-    foreach (var item in campeaos)
+    foreach (var item in campeoes)
         item.Update();
 
-    foreach (var item in campeaos)
+    foreach (var item in campeoes)
         item.Draw(g);
 
     if(teste)
@@ -236,42 +245,25 @@ pb.MouseUp += (o, e) =>
 
 form.KeyDown += (o, e) =>
 {
-    if(e.KeyCode == Keys.D1)
-    {
-        
-    }
-    // if (DonPlatinado.ActualState == State.Batendo)
-    //     DonPlatinado.ActualState = State.Andando;
-    // else if (DonPlatinado.ActualState == State.Andando)
-    //     DonPlatinado.ActualState = State.Batendo;
+   
 };
-
 
 
 void roletar()
 {
     if(gold >= 2)
     {
-        foreach (var champ in campeaos)
+        foreach (var champ in campeoes)
             champ.ActualSlot.Clear();
-
 
         for (int i = 0; i < 5; i++)
         {
             indexAleatorio = rand.Next(9);
         
-            campeaos[indexAleatorio].ActualSlot.Add(campeaos[indexAleatorio].Slots[i]);
-            campeaos[indexAleatorio].ActualState = State.Shop;
+            campeoes[indexAleatorio].ActualSlot.Add(campeoes[indexAleatorio].Slots[i]);
+            campeoes[indexAleatorio].ActualState = State.Shop;
         }
         gold = gold - 2;
-    }
-}
-
-void comprar()
-{
-    for(int i = 0; i < 5; i++)
-    {
-
     }
 }
 

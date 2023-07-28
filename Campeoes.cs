@@ -2,6 +2,7 @@ public class Campeao
 {
     public TimeSpan AnimationSpeed { get; set; } = TimeSpan.FromMilliseconds(200);
     public List<Rectangle> Slots { get; set; } = new List<Rectangle>();
+    public List<Rectangle> Bancos { get; set; } = new List<Rectangle>();
     public Bitmap ShopImage { get; set; }
     public string Name { get; set; }
     public int Value { get; set; }
@@ -15,11 +16,32 @@ public class Campeao
     public Bitmap Sprites { get; set; }
     public Dictionary<State, List<Rectangle>> srcRect { get; set; } = new(); 
     public List<Rectangle> ActualSlot { get; set; } = new List<Rectangle>();
+    public List<Rectangle> ActualBanco { get; set; } = new List<Rectangle>();
     private Rectangle actualFrame;
     public State ActualState { get; set; } = State.Andando;
+    private string path;
 
-    public Campeao(string pathImg, string name, int value, string raridade, int life, int attackDamage, int attackSpeed, Classes[] classe, string path, List<Rectangle> slots)
+    public Campeao Clone()
     {
+        Campeao copy = new Campeao(
+            path,
+            Name,
+            Value,
+            Raridade,
+            Life,
+            AttackDamage,
+            AttackSpeed,
+            Classe,
+            "",
+            Slots,
+            Bancos
+        );
+        return copy;
+    }
+
+    public Campeao(string pathImg, string name, int value, string raridade, int life, int attackDamage, int attackSpeed, Classes[] classe, string path, List<Rectangle> slots, List<Rectangle> bancos)
+    {
+        this.path = pathImg;
         ShopImage = new Bitmap(pathImg);
         Name = name;
         Value = value;
@@ -29,11 +51,12 @@ public class Campeao
         AttackSpeed = attackSpeed;
         Classe = classe;
 
-        this.Sprites = new Bitmap(path);
+        // this.Sprites = new Bitmap(path);
         this.Position = new Point(0, 0);
         this.Slots = slots;
+        this.Bancos = bancos;
 
-        setFrames();
+        // setFrames();
     }
 
     private DateTime start = DateTime.Now;
@@ -41,9 +64,9 @@ public class Campeao
     public void Update()
     {
         // Handle frames
-        var time = DateTime.Now - start;
-        var index = (int)(time / AnimationSpeed) % srcRect[ActualState].Count;
-        actualFrame = srcRect[ActualState][index];
+        // var time = DateTime.Now - start;
+        // var index = (int)(time / AnimationSpeed) % srcRect[ActualState].Count;
+        // actualFrame = srcRect[ActualState][index];
         // Handle frames
     }
 
@@ -54,11 +77,15 @@ public class Campeao
             foreach (var rect in ActualSlot)
                 g.DrawImage(ShopImage, rect, new Rectangle(0, 0, ShopImage.Width, ShopImage.Height), GraphicsUnit.Pixel);
         }
+        else if (ActualState == State.Banco)
+        {
+            foreach (var rect in ActualBanco)
+                g.DrawImage(ShopImage, rect, new Rectangle(0, 0, ShopImage.Width, ShopImage.Height), GraphicsUnit.Pixel);
+        }
         else
         {
-            foreach (var rect in ActualSlot)
-         
-                g.DrawImage(Sprites, rect, actualFrame, GraphicsUnit.Pixel);
+            // foreach (var rect in ActualSlot)
+            //     g.DrawImage(Sprites, rect, actualFrame, GraphicsUnit.Pixel);
         }
     }
 

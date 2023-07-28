@@ -4,10 +4,12 @@ using System.Drawing.Drawing2D;
 public static class Front
 {
     public static List<Rectangle> Slots { get; private set; } = new List<Rectangle>();
+    public static List<Rectangle> Bancos { get; private set; } = new List<Rectangle>();
+    private static int bancoSize = 0;
     public static bool locked = false;
 
     private static bool updateMouseDown = false;
-    public static void Desenhar(Bitmap bmp, Graphics g, Point cursor, bool isDown, int gold, int goldEnemy)
+    public static void Desenhar(Bitmap bmp, Graphics g, Point cursor, bool isDown, int gold, int goldEnemy, List<Campeao> campeoes)
     {
         #region Canetas
         Pen canetaPreta = new Pen(Brushes.Black, 5f);
@@ -149,6 +151,15 @@ public static class Front
         Rectangle myChamp7 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 6), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
         Rectangle myChamp8 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 7), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
         Rectangle myChamp9 = new Rectangle(point0LargMyChamps + (larguraMyChampsSlot * 8), point0AltMyChamps, larguraMyChampsSlot,  alturaMyChamps);
+        Bancos.Add(myChamp1);
+        Bancos.Add(myChamp2);
+        Bancos.Add(myChamp3);
+        Bancos.Add(myChamp4);
+        Bancos.Add(myChamp5);
+        Bancos.Add(myChamp6);
+        Bancos.Add(myChamp7);
+        Bancos.Add(myChamp8);
+        Bancos.Add(myChamp9);
 
         Rectangle enemyChamp1 = new Rectangle(point0LargMyChamps, point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
         Rectangle enemyChamp2 = new Rectangle(point0LargMyChamps + larguraMyChampsSlot, point0AltArena, larguraMyChampsSlot,  alturaMyChamps);
@@ -498,19 +509,38 @@ public static class Front
             OnRoll();
         }
 
-      
 
-    // Exemplo para mudar de cor ao clicar/passar o mouse
-        // g.DrawRectangle(canetaPreta, arena);
-        // if (arena.Contains(cursor))
-        // {
-        //     g.FillRectangle(Brushes.Red, arena);
-        //     if(arena.Contains(cursor) && isDown == true)
-        //         g.FillRectangle(Brushes.Blue, arena);
-        // }
+        for (int i = 0; i < Slots.Count; i++)
+        {
+            if (Slots[i].Contains(cursor) && isDown)
+                updateMouseDown = true;
+        
+            if (Slots[i].Contains(cursor) && !isDown && updateMouseDown)
+            {
+                updateMouseDown = false;
+                comprar(i);
+            }
+        }
+      
+        void comprar(int i)
+        {
+            for (int j = 0; j < campeoes.Count; j++)
+            {
+                var champ = campeoes[j];
+                if (champ.ActualSlot.Contains(Slots[i]))
+                {
+                    champ.ActualSlot.Clear();
+
+                    var copy = champ.Clone();
+                    copy.ActualBanco.Add(Bancos[bancoSize++]);
+                    campeoes.Add(copy);
+                    copy.ActualState = State.Banco;
+                    return;
+                }
+            }
+        }
     }
 
     public static event Action OnRoll;
-
     
 }
